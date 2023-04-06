@@ -12,9 +12,10 @@ double TestResults[5][4];
 template <typename T>
 double add_test(T a, T b, int n)
 {
+    int c = 0;
     auto start = chrono::high_resolution_clock::now();
     for (int i = 0; i < n; i++) {
-        a = a + b;
+        c = a + b;
     }
     auto end = chrono::high_resolution_clock::now();
     return n / (static_cast<double>(chrono::duration_cast<chrono::nanoseconds>(end - start).count()) / n);
@@ -23,24 +24,10 @@ double add_test(T a, T b, int n)
 template <typename T>
 double sub_test(T a, T b, int n)
 {
+    int c = 0;
     auto start = chrono::high_resolution_clock::now();
     for (int i = 0; i < n; i++) {
-        a = a - b;
-        a = a - b;
-        a = a - b;
-        a = a - b;
-        a = a - b;
-        a = a - b;
-        a = a - b;
-        a = a - b;
-        a = a - b;
-        a = a - b;
-        a = a - b;
-        a = a - b;
-        a = a - b;
-        a = a - b;
-        a = a - b;
-        a = a - b;
+        c = a - b;
     }
     auto end = chrono::high_resolution_clock::now();
     return n / (static_cast<double>(chrono::duration_cast<chrono::nanoseconds>(end - start).count()) / n);
@@ -49,55 +36,23 @@ double sub_test(T a, T b, int n)
 template <typename T>
 double mul_test(T a, T b, int n)
 {
+    int c = 0;
     auto start = chrono::high_resolution_clock::now();
     for (int i = 0; i < n; i++) {
-        a = a * b;
-        a = a * b;
-        a = a * b;
-        a = a * b;
-        a = a * b;
-        a = a * b;
-        a = a * b;
-        a = a * b;
-        a = a * b;
-        a = a * b;
-        a = a * b;
-        a = a * b;
-        a = a * b;
-        a = a * b;
-        a = a * b;
-        a = a * b;
+        c = a * b;
     }
     auto end = chrono::high_resolution_clock::now();
+
     return n / (static_cast<double>(chrono::duration_cast<chrono::nanoseconds>(end - start).count()) / n);
 }
 
 template <typename T>
 double div_test(T a, T b, int n)
 {
+    int c = 0;
     auto start = chrono::high_resolution_clock::now();
     for (int i = 0; i < n; i++) {
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
-        a = a / b;
+        c = a / b;
     }
     auto end = chrono::high_resolution_clock::now();
     return n / (static_cast<double>(chrono::duration_cast<chrono::nanoseconds>(end - start).count()) / n);
@@ -134,8 +89,8 @@ void Test(int n) {
 string line_diagram(int percent)
 {
     string diagram;
-    for (int i = 0; i < 100 / 8; i++) {
-        if (i < percent) {
+    for (int i = 0; i < 100 / 5; i++) {
+        if (i < percent / 5) {
             diagram += "X";
         }
         else {
@@ -176,10 +131,10 @@ void print_results(double fastest)
     int div_percent = (int)(TestResults[intOfType][3] * 100 / fastest);
 
     // Виводимо результати у табличному вигляді
-    cout << "Додавання + \t\t" << typeName << "\t\t\t" << TestResults[intOfType][0] << "\t\t" << line_diagram(add_percent) << "\t\t" << add_percent << endl;
-    cout << "Віднімання - \t\t" << typeName << "\t\t\t" << TestResults[intOfType][1] << "\t\t" << line_diagram(sub_percent) << "\t\t" << sub_percent << endl;
-    cout << "Множення * \t\t" << typeName << "\t\t\t" << TestResults[intOfType][2] << "\t\t" << line_diagram(mul_percent) << "\t\t" << mul_percent << endl;
-    cout << "Ділення / \t\t" << typeName << "\t\t\t" << TestResults[intOfType][3] << "\t\t" << line_diagram(div_percent) << "\t\t" << div_percent << endl;
+    cout << "Додавання + \t\t" << typeName << "\t\t\t" << TestResults[intOfType][0] << "\t\t" << line_diagram(add_percent) << "\t" << add_percent << endl;
+    cout << "Віднімання - \t\t" << typeName << "\t\t\t" << TestResults[intOfType][1] << "\t\t" << line_diagram(sub_percent) << "\t" << sub_percent << endl;
+    cout << "Множення * \t\t" << typeName << "\t\t\t" << TestResults[intOfType][2] << "\t\t" << line_diagram(mul_percent) << "\t" << mul_percent << endl;
+    cout << "Ділення / \t\t" << typeName << "\t\t\t" << TestResults[intOfType][3] << "\t\t" << line_diagram(div_percent) << "\t" << div_percent << endl;
     cout << "-----------------------------------------------------------------------------------------------------\n";
 }
 
@@ -203,7 +158,7 @@ int main()
     SetConsoleOutputCP(1251);
     cout << "Операція\t\tТип данних\t\tОп/с\t\t\t\tДіаграма, %\n";
     cout << "=====================================================================================================\n";
-    int countOfOperations = 1000000;
+    int countOfOperations = 99990000;
     Test(countOfOperations);
     double fastest = TheFasterOper();
     

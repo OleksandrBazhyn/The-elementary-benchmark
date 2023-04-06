@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <chrono>
 #include <Windows.h>
 
@@ -131,10 +132,36 @@ void print_results(double fastest)
     int div_percent = (int)(TestResults[intOfType][3] * 100 / fastest);
 
     // Виводимо результати у табличному вигляді
-    cout << "Додавання + \t\t" << typeName << "\t\t\t" << TestResults[intOfType][0] << "\t\t" << line_diagram(add_percent) << "\t" << add_percent << endl;
-    cout << "Віднімання - \t\t" << typeName << "\t\t\t" << TestResults[intOfType][1] << "\t\t" << line_diagram(sub_percent) << "\t" << sub_percent << endl;
-    cout << "Множення * \t\t" << typeName << "\t\t\t" << TestResults[intOfType][2] << "\t\t" << line_diagram(mul_percent) << "\t" << mul_percent << endl;
-    cout << "Ділення / \t\t" << typeName << "\t\t\t" << TestResults[intOfType][3] << "\t\t" << line_diagram(div_percent) << "\t" << div_percent << endl;
+    cout << setiosflags(ios::left);
+
+    cout << setw(25) << "Додавання +";
+    cout << setw(22) << typeName;
+    cout << setw(25) << TestResults[intOfType][0];
+    cout << setw(25) << line_diagram(add_percent);
+    cout << add_percent << endl;
+
+    cout << setw(25) << "Віднімання -";
+    cout << setw(22) << typeName;
+    cout << setw(25) << TestResults[intOfType][1];
+    cout << setw(25) << line_diagram(sub_percent);
+    cout << sub_percent << endl;
+
+    cout << setw(25) << "Множення *";
+    cout << setw(22) << typeName;
+    cout << setw(25) << TestResults[intOfType][2];
+    cout << setw(25) << line_diagram(mul_percent);
+    cout << mul_percent << endl;
+
+    cout << setw(25) << "Ділення /";
+    cout << setw(22) << typeName;
+    cout << setw(25) << TestResults[intOfType][3];
+    cout << setw(25) << line_diagram(div_percent);
+    cout << div_percent << endl;
+
+    //cout << "Додавання + \t\t" << typeName << "\t\t\t" << TestResults[intOfType][0] << "\t\t" << line_diagram(add_percent) << "\t" << add_percent << endl;
+    //cout << "Віднімання - \t\t" << typeName << "\t\t\t" << TestResults[intOfType][1] << "\t\t" << line_diagram(sub_percent) << "\t" << sub_percent << endl;
+    //cout << "Множення * \t\t" << typeName << "\t\t\t" << TestResults[intOfType][2] << "\t\t" << line_diagram(mul_percent) << "\t" << mul_percent << endl;
+    //cout << "Ділення / \t\t" << typeName << "\t\t\t" << TestResults[intOfType][3] << "\t\t" << line_diagram(div_percent) << "\t" << div_percent << endl;
     cout << "-----------------------------------------------------------------------------------------------------\n";
 }
 
@@ -158,7 +185,7 @@ int main()
     SetConsoleOutputCP(1251);
     cout << "Операція\t\tТип данних\t\tОп/с\t\t\t\tДіаграма, %\n";
     cout << "=====================================================================================================\n";
-    int countOfOperations = 99990000;
+    int countOfOperations = 10515131;
     Test(countOfOperations);
     double fastest = TheFasterOper();
     
